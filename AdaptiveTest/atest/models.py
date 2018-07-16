@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -23,15 +25,6 @@ class Question(models.Model):
         return self.question
 
 
-class Result(models.Model):
-    userId = models.ForeignKey('UserProfile', on_delete='null',
-                               related_name='Users',
-                               null='false')
-    answer = models.ForeignKey('Answer', on_delete='null',
-                               related_name='Answers',
-                               null='false')
-
-
 class Test(models.Model):
     name = models.TextField()
     firstQuestion = models.ForeignKey('Question', on_delete='null',
@@ -42,18 +35,26 @@ class Test(models.Model):
         return self.name
 
 
-class UserProfile(models.Model):
-    user = models.ForeignKey(User, on_delete='null',
-                             related_name='Users',
-                             null='false')
-    username = models.TextField()
-    surname = models.TextField()
-    email = models.EmailField(blank=True)
-    name = models.TextField()
-    age = models.IntegerField(blank=True)
-    password = models.TextField()
+class TestSession(models.Model):
+    userID = models.ForeignKey(User, on_delete='null',
+                               related_name='Users',
+                               null='false')
+    testID = models.ForeignKey(Test, on_delete='null',
+                               related_name='PassingTests',
+                               null='false')
 
-    def __str__(self):
-        return self.username
+
+class UsersAnswers(models.Model):
+    date = models.DateTimeField(default=datetime.now())
+    sessionID = models.ForeignKey(TestSession, on_delete='null',
+                                  related_name='Sessions',
+                                  null='false')
+    questionID = models.ForeignKey(Question, on_delete='null',
+                                   related_name='SessionQuestions',
+                                   null='false')
+    answersID = models.ForeignKey(Answer, on_delete='null',
+                                  related_name='SessionAnswers',
+                                  null='false')
+
 
 

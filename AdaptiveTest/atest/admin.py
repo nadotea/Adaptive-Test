@@ -3,7 +3,7 @@ from .models import *
 
 admin.site.register(Question)
 admin.site.register(Answer)
-admin.site.register(UserProfile)
-admin.site.register(Result)
+admin.site.register(TestSession)
+admin.site.register(UsersAnswers)
 admin.site.register(Test)
 # Register your models here.

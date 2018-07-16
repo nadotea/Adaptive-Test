@@ -15,21 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import ListView, DetailView
+
+from atest import views
 from atest.models import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('', include('atest.urls')),
-    url('^tests/$', ListView.as_view(queryset=Test.objects.all().order_by("name")[:20],
-                                     template_name="aTest/tests.html")),
-    url('test/', include('atest.urls')),
-    url('registration/', include('atest.urls')),
-    url('login/', include('atest.urls')),
-    url('about/', include('atest.urls')),
-    url('help/', include('atest.urls')),
-    # url('login', include('atest.urls')),
-    # url('login', include('atest.urls')),
+    re_path('', include('atest.urls')),
+    # url('^tests/$', ListView.as_view(queryset=Test.objects.all().order_by("name")[:20],
+    #                                  template_name="aTest/tests.html")),
+    # re_path('test/', include('atest.urls')),
+    # re_path('about/', include('atest.urls')),
+    # re_path('help/', include('atest.urls')),
+    re_path('login/', include('atest.urls')),
+    re_path('logout/', include('atest.urls')),
+    re_path('register/', include('atest.urls')),
 ]
 

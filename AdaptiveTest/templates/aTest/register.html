@@ -1,0 +1,14 @@
+{% extends 'aTest/base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+    <h2>Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- as_p для того, чтобы каждый элемент формы был с новой строки -->
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+
+{% endblock %}

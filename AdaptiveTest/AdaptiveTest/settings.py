@@ -25,7 +25,7 @@ SECRET_KEY = '71@3wonmfz%qqf0py3^)@t=k#@vxy$spa49^^u=s@@1y%i4%0b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'NitaKai.pythonanywhere.com', 'localhost:8000', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost:8000', 'localhost']
 
 
 # Application definition
