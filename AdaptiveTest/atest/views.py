@@ -1,7 +1,30 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.contrib import auth
 
 
 def homepage(request):
-    return render(request, 'homepage.html', locals())
-# Create your views here.
+    return render(request,
+                  'aTest/homepage.html',
+                  locals())
+
+
+def testinfo(request):
+    return
+
+
+def test(request):
+    return render(request,
+                  'aTest/test.html',
+                  locals())
+
+
+def about(request):
+    return render(request,
+                  'aTest/about.html',
+                  locals())
+
+
+def help(request):
+    return render(request,
+                  'aTest/help.html',
+                  locals())

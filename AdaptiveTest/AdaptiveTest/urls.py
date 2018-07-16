@@ -15,12 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import path
-
-from atest import views
+from django.urls import path, include
+from django.views.generic import ListView, DetailView
+from atest.models import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('', views.homepage, name='homepage')
+    url('', include('atest.urls')),
+    url('^tests/$', ListView.as_view(queryset=Test.objects.all().order_by("name")[:20],
+                                     template_name="aTest/tests.html")),
+    url('test/', include('atest.urls')),
+    url('registration/', include('atest.urls')),
+    url('login/', include('atest.urls')),
+    url('about/', include('atest.urls')),
+    url('help/', include('atest.urls')),
+    # url('login', include('atest.urls')),
+    # url('login', include('atest.urls')),
 ]
 
