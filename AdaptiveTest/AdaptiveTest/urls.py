@@ -18,19 +18,15 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from django.views.generic import ListView, DetailView
 
-from atest import views
-from atest.models import *
+# from atest import views
+import atest
+from atest.models import Test
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('', include('atest.urls')),
-    # url('^tests/$', ListView.as_view(queryset=Test.objects.all().order_by("name")[:20],
-    #                                  template_name="aTest/tests.html")),
-    # re_path('test/', include('atest.urls')),
-    # re_path('about/', include('atest.urls')),
-    # re_path('help/', include('atest.urls')),
-    re_path('login/', include('atest.urls')),
-    re_path('logout/', include('atest.urls')),
-    re_path('register/', include('atest.urls')),
+    url(r'^$', atest.views.home, name='home'),
+    url(r'^register/?$', atest.views.RegisterFormView.as_view(), name="register"),
+    url(r'^login/?$', atest.views.LoginFormView.as_view(), name="login"),
+    url(r'^logout/?$', atest.views.LogoutView.as_view(), name="logout"),
+    url(r'^tests/?$', ListView.as_view(queryset=Test.objects.all(), template_name="aTest/"), name="tests"),
 ]
-
